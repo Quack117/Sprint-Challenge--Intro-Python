@@ -10,8 +10,8 @@ class GroundVehicle():
         else:
             self.num_wheels = num_wheels
         
-        def drive(self):
-            return "vroooom"
+    def drive(self):
+        return "vroooom"
 
     # TODO
 
@@ -33,13 +33,16 @@ class Motorcycle(GroundVehicle):
 # TODO
 
 vehicles = [
-    GroundVehicle(),
-    GroundVehicle(),
-    Motorcycle(),
-    GroundVehicle(),
-    Motorcycle(),
+    GroundVehicle(4),
+    GroundVehicle(4),
+    Motorcycle(2),
+    GroundVehicle(4),
+    Motorcycle(2),
 ]
 
 # Go through the vehicles list and print the result of calling drive() on each.
+while v
+
+print()
 
 # TODO
