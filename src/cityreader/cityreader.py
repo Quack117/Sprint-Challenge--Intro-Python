@@ -14,22 +14,23 @@
 #
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
+#import reader
+import os
 
-from csv import reader
-with open('cities.csv') as read_obj:
-    # pass the file object to reader() to get the reader object
-    csv_reader = reader(read_obj)
-    # Pass reader object to list() to get a list of lists
-    list_of_rows = list(csv_reader)
-    print(list_of_rows)
+cwd = os.getcwd()  # Get the current working directory (cwd)
+files = os.listdir(cwd)  # Get all the files in that directory
+print("Files in %r: %s" % (cwd, files))
 
+import csv 
 
+#city,state_name,county_name,lat,lng,population,density,timezone,zips
 class City:
   def __init__(self, name, lat, lon):
     self.name = name
     self.lat = lat
     self.lon = lon
-
+  def __repr__(self):
+    return "<{} {},{}>".format(self.name, self.lat, self.lon)
 
 
 cities = []
@@ -37,7 +38,22 @@ cities = []
 
 
 def cityreader(cities=[]):
-  
+  lines = []
+  with open('./src/cityreader/cities.csv', newline="") as read_obj:
+    # pass the file object to reader() to get the reader object
+    #csv_reader = csv.reader(read_obj)
+    # Pass reader object to list() to get a list of lists
+    #list_of_rows = list(csv_reader)
+    reader = csv.reader(read_obj, delimiter=",")
+    for line in reader:
+      lines.append(line)
+    
+    for line in lines[1:]:
+      cities.append(City(line[0], float(line[3]), float(line[4])))
+   
+    
+
+    
     
   # TODO Implement the functionality to read from the 'cities.csv' file
   # Ensure that the lat and lon valuse are all floats
@@ -47,10 +63,11 @@ def cityreader(cities=[]):
     return cities
 
 cityreader(cities)
-
+print(cities)
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
-    print(c)
+  print(c)
+ 
 
 # STRETCH GOAL!
 #
